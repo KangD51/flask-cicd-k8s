@@ -40,8 +40,8 @@ jobs:
       - uses: actions/checkout@v3 
       - name: Set up kubeconfig file
         run: |
-            mkdir -p $HOME/.kube
-            echo "${{ secrets.KUBECONFIG_CONTENT }}" > $HOME/.kube/config
+             mkdir -p $HOME/.kube
+             echo "${{ secrets.KUBECONFIG_BASE64 }}" | base64 --decode > $HOME/.kube/config
       - name: Deploy with kubectl
         run: |
           kubectl apply -f k8s/deployment.yaml
