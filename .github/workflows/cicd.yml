@@ -39,7 +39,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3 
       - name: Set up kubeconfig file
-        run: echo "${{ secrets.KUBECONFIG_CONTENT }}" > $HOME/.kube/config
+        run: |
+            mkdir -p $HOME/.kube
+            echo "${{ secrets.KUBECONFIG_CONTENT }}" > $HOME/.kube/config
       - name: Deploy with kubectl
         run: |
           kubectl apply -f k8s/deployment.yaml
